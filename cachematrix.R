@@ -1,18 +1,22 @@
-## Matrix inversion is usually a costly computation and there may be some
+## Matrix inversion is usually a costly operation and there may be some
 ## benefit to caching the inverse of a matrix rather than computing it
-## repeatedly.
+## every time.
 ## The following two functions 'makeCacheMatrix' and 'cacheSolve' permit to
 ## define a special 'matrix' that can cache the inverse matrix in order to
-## reduce the time cost of evaluating it every time.
+## reduce the time cost of evaluating it repeatedly.
 
-## This function creates a special 'matrix' object that can cache its inverse.
+
+## This function computes the inverse of the special 'matrix' returned by
+## the 'makeCacheMatrix' function depicted above.
+## If the inverse matrix has already been calculated, this function should
+## retrieve the inverse from the cache.
 ## 
 ## inputs:
-## - x: a matrix that can be invertable
+## - x: a special 'matrix' created by the 'makeCacheMatrix' function
+## - ...: all the extra arguments are passed to the R 'solve' function
 ## 
 ## outputs:
-## a special 'matrix' that stores the original matrix and its inverse
-## calculated via 'cacheSolve' function.
+## the inverse matrix of the input special 'matrix'
 makeCacheMatrix <- function(x = matrix()) {
     inversematrix <- NULL
     set <- function(y) {
